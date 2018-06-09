@@ -1,7 +1,8 @@
 import React from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import LogIn from "./LogIn";
-import SignUp from "./SignUp";
+import LogIn from "../components/LogIn";
+import SignUp from "../components/SignUp";
+import Search from "./Search";
 
 export default class LandingPage
     extends React.Component {
@@ -10,8 +11,7 @@ export default class LandingPage
     render() {
         return(
             <div>
-                <LogIn />
-                <SignUp />
+                <Search/>
             </div>
 
         )
