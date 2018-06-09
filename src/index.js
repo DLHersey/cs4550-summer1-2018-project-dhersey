@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import MainPage from './Containers/MainPage';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(
+    <div className="container-fluid">
+        <MainPage />
+    </div>
+    , document.getElementById('root'));
