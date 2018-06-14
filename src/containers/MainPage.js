@@ -7,9 +7,6 @@ export default class MainPage
 
 
 
-
-
-
     render() {
         return(
             <div className="container-fluid">

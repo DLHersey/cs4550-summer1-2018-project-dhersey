@@ -2,7 +2,7 @@ import React from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import SearchItem from "../components/SearchItem";
 
-export default class Search
+export default class SearchPage
     extends React.Component {
 
     constructor(props) {
