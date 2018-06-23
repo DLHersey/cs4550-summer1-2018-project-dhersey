@@ -1,0 +1,27 @@
+import * as constants from '../constants';
+import SessionApi from '../api/sessionApi';
+import auth from '../auth/authenticator';
+
+export const loginSuccess = dispatch => {
+    console.log("login success");
+    dispatch({ type: constants.USER_LOGIN_SUCCESS})
+}
+
+
+export const loginUser = (dispatch, credentials) => {
+    console.log("login: " + credentials.username);
+   // sessionStorage.setItem('jwt', SessionApi.login(credentials));
+   SessionApi.login(credentials).then(response => {
+    sessionStorage.setItem('jwt', response.jwt);
+    dispatch({type: constants.USER_LOGIN_SUCCESS});
+   })
+}
+
+
+
+export const logOutUser = dispatch => {
+    console.log("logout success");
+    auth.logOut();
+    dispatch({ type: constants.USER_LOGIN_SUCCESS})
+}
+
