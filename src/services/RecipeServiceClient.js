@@ -1,6 +1,6 @@
 let _singleton = Symbol();
 
-const BASE_RECIPE_API_URL = 'https://api.edamam.com/search?app_id=2fe382ed&app_key=2d7e7901c20eb0335064e3fce88632d5';
+const BASE_RECIPE_API_URL = 'https://api.edamam.com/search?app_id=0c5eb4f6&app_key=6105e2f09e41dc0cc72692039781df82';
 
 export default class RecipeService {
     constructor(singletonToken) {

@@ -8,11 +8,16 @@ export default class ProfilePage
 
         renderParts() {
             console.log("ProfilePage - renderParts - auth.loggedIn: " + auth.loggedIn());
+            console.log("Profile page " + auth.getFirstName());
+            /*
             if (auth.loggedIn()) {
                 return <div>Hello There!</div>
             } else {
                 return <LogInContainer />
             }
+            */
+           var greeting = "Hello " + auth.getFirstName() + "! You're a " + auth.getRole() + "!";
+           return (<div>{greeting}<button onClick={auth.logOut()}>Log Out</button></div>);
         }
 
 

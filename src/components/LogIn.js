@@ -1,19 +1,37 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
+import {BrowserRouter as Router, Route, Redirect, withRouter} from 'react-router-dom';
 import * as sessionActions from '../actions/sessionActions';
 import {connect} from 'react-redux'
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-
+import ProfilePage from '../containers/ProfilePage';
+import auth from '../auth/authenticator';
 
 class LogIn
     extends React.Component {
 
         constructor(props) {
             super(props);
-            this.state = {credentials: { username: '', password: '' } };
+            this.state = {credentials: { username: '', password: '' }, 
+                        redirectToReferrer: false };
             this.onChange = this.onChange.bind(this);
             this.login = this.login.bind(this);
+            //this.checkRedirect = this.checkRedirect.bind(this);
         }
+
+
+        checkRedirect() {
+            const { from } = this.props.location.state || {from: {pathname: "/"}};
+          //  console.log(this.props.location.state);
+         //   console.log({from});
+           // const { redirectToReferrer } = auth.loggedIn();
+           console.log(auth.loggedIn());
+            if (auth.loggedIn()) {
+                console.log({from});
+                debugger;
+            //return(<Router><Redirect push to={"/ProfilePage"} /><Route path="/ProfilePage" component={ProfilePage} /></Router>);    
+            return (<Redirect to={from} />);
+            }
+        }    
 
         onChange(event) {
             const field = event.target.name;
@@ -26,9 +44,12 @@ class LogIn
         event.preventDefault();
         console.log(this.state.credentials);
         this.props.loginUser(this.state.credentials);
+        this.setState({redirectToReferrer: auth.loggedIn()});
     }
 
+
     render() {
+        this.checkRedirect();
         return(
             <div className="row align-items-center">
                 <div className="col"/>
@@ -63,5 +84,5 @@ const dispatchToPropsMapper = dispatch => ({
     logOutUser: ()=> sessionActions.logOutUser(dispatch),
 })
 
-const LogInContainer = connect(stateToPropertiesMapper, dispatchToPropsMapper)(LogIn);
+const LogInContainer = withRouter(connect(stateToPropertiesMapper, dispatchToPropsMapper)(LogIn));
 export default LogInContainer;

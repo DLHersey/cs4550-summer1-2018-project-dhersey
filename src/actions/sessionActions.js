@@ -12,8 +12,16 @@ export const loginUser = (dispatch, credentials) => {
     console.log("login: " + credentials.username);
    // sessionStorage.setItem('jwt', SessionApi.login(credentials));
    SessionApi.login(credentials).then(response => {
-    sessionStorage.setItem('jwt', response.jwt);
+       debugger;
+       if (response.id === undefined) {
+        dispatch({type: constants.USER_LOGOUT});
+       } else {
+    sessionStorage.setItem('jwt', response);
+    sessionStorage.setItem('firstName', response.firstName);
+    sessionStorage.setItem('role', response.role);
+    sessionStorage.setItem('userId', response.id);
     dispatch({type: constants.USER_LOGIN_SUCCESS});
+       }
    })
 }
 
@@ -24,4 +32,5 @@ export const logOutUser = dispatch => {
     auth.logOut();
     dispatch({ type: constants.USER_LOGIN_SUCCESS})
 }
+
 

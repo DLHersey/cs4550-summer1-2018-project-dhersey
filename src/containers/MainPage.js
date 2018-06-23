@@ -1,7 +1,9 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
+import {BrowserRouter as Router, 
+    Route,
+    Link,
+    Switch } from 'react-router-dom';
+import {Redirect, withRouter } from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import LandingPage from './LandingPage';
 import ProfilePage from './ProfilePage';
@@ -10,6 +12,15 @@ import auth from '../auth/authenticator';
 
 export default class MainPage
     extends React.Component {
+
+        renderLogin() {
+            if (auth.loggedIn()) {
+                return(<li className="nav-item"><a onclick="auth.logout();">Log Out</a></li>);
+            } else {
+                return(<li className="nav-item"><Link className="nav-link" to={'/Login'}>Login</Link></li>);
+            }
+        }
+
 
     render() {
         return(
@@ -41,10 +52,9 @@ export default class MainPage
                            component={LandingPage}>
                     </Route>
 
-                    <Route path="/ProfilePage"
-                           component={ProfilePage} 
-                           onEnter={requireAuth} >
-                    </Route>
+                    <PrivateRoute path="/ProfilePage"
+                           component={ProfilePage} >
+                    </PrivateRoute>
                     <Route path="/Login"
                             component={LogInContainer}>
                     </Route>
@@ -58,6 +68,26 @@ export default class MainPage
     }
 }
 
+const PrivateRoute = ({ component: Component, ...rest}) => (
+    <Route  
+        {...rest}
+        render={props => auth.loggedIn() ? (
+            <Component {...props} />
+        ) : (
+            <Redirect
+            to={{
+                pathname: "/Login",
+                state: { from: props.location }
+            }}
+            />
+        )
+    }
+    />
+);
+
+
+
+/*
 function requireAuth(nextState, replace) {  
     console.log("in requreAuth: " + auth.loggedIn());
     if (!auth.loggedIn()) {
@@ -67,6 +97,6 @@ function requireAuth(nextState, replace) {
       })
     }
   }
-
+*/
 
 

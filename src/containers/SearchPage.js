@@ -35,6 +35,9 @@ export default class SearchPage
         this.renderPagers = this.renderPagers.bind(this);
         this.updatePageItems = this.renderPagers.bind(this);
         this.getStartIndex = this.getStartIndex.bind(this);
+        this.increasePage = this.increasePage.bind(this);
+        this.decreasePage = this.decreasePage.bind(this);
+        this.runPageSearch = this.runPageSearch.bind(this);
     }
 
     onChange(event) {
@@ -92,25 +95,58 @@ export default class SearchPage
         }
     } */
 
-    getStartIndex() {
-        var startIndex = (this.state.page-1) * PageSizePlusOne;
+    getStartIndex(pageNumber) {
+        var curPage = pageNumber;
+        var startPage = curPage-1;
+        var startIndex = startPage * PageSizePlusOne;
         return startIndex;
     }
 
+    decreasePage() {
+        var curpage = this.state.page;
+        var newPage = curpage - 1;
+        this.updatePageItems(newPage);
+    }
+
+    increasePage() {
+        var curpage = this.state.page;
+        var newPage = curpage + 1;
+        this.updatePageItems(newPage);
+    }
+
     updatePageItems(newPage) {
+        debugger;
         if (this.state.searchResult != null) {
-            var maxPage = (this.state.searchResult.count/PageSize) + 1;
+            var pageCount = this.state.searchResult.count;
+            var maxPage = (pageCount/PageSize) + 1;
         
             if (newPage > 0 && newPage < maxPage) {
-                this.state.page = newPage;
-                this.runSearch();
+                //this.state.page = newPage;
+                this.runPageSearch(newPage);
             }
+        }
+    }
+
+
+    runPageSearch(pageNumber) {
+        debugger;
+        if (this.state.searchTerm !== "") {
+            var startIndex = this.getStartIndex(pageNumber);
+            var endIndex = startIndex + PageSize;
+        this.recipeService.search(this.state.searchTerm, startIndex, endIndex)
+        .then(result => { 
+            this.setResults(result)
+            //this.searchResult = result;
+            //this.state.hits = result.hits;
+            //this.state.more = result.more;
+            //this.state.maxItem = result.count;
+        });
         }
     }
 
     runSearch() {
         if (this.state.searchTerm !== "") {
-            var startIndex = this.getStartIndex();
+            var startIndex = this.getStartIndex(this.state.page);
             var endIndex = startIndex + PageSize;
         this.recipeService.search(this.state.searchTerm, startIndex, endIndex)
         .then(result => { 
@@ -156,12 +192,12 @@ export default class SearchPage
     renderPagers() {
         if (this.state.searchResult != null) {
             if ((this.state.page > 1) && (this.state.searchResult.more)) {
-                return (<div><button type="button" onClick={this.updatePageItems(this.state.page--)} >Back</button><br />
-                <button type="button" onClick={this.updatePageItems(this.state.page++)} >Next</button></div>)
-            } else if (this.state.page == 1) {
-                return (<div><button type="button" onClick={this.updatePageItems(this.state.page++)} >Next</button></div>)
+                return (<div><button type="button" onClick={this.decreasePage()} >Back</button><br />
+                <button type="button" onClick={this.increasePage()} >Next</button></div>)
+            } else if (this.state.page === 1) {
+                return (<div><button type="button" onClick={this.increasePage()} >Next</button></div>)
             } else if (!this.state.searchResult.more) {
-                return (<div><button type="button" onClick={this.updatePageItems(this.state.page--)} >Back</button></div>)
+                return (<div><button type="button" onClick={this.decreasePage()} >Back</button></div>)
             } else {
                 return;
             }
@@ -190,7 +226,7 @@ export default class SearchPage
                             {this.renderResults()}
                         </ul>
                     </div>
-         
+               
                 </div>
             </div>
         )
