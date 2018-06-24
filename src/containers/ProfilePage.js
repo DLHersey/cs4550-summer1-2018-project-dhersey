@@ -2,6 +2,7 @@ import React from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import auth from '../auth/authenticator';
 import LogInContainer from "../components/LogIn";
+import FavoritesList from "./FavoritesList";
 
 export default class ProfilePage
     extends React.Component {
@@ -25,6 +26,8 @@ export default class ProfilePage
             return(
                 <div>
                     {this.renderParts()}
+                    <hr/>
+                    <FavoritesList/>
                 </div>
     
             )

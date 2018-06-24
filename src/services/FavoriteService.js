@@ -1,6 +1,7 @@
 let _singleton = Symbol();
 
 const FAVORITE_API_URL = 'http://localhost:8080/api/favorite';
+const USER_API_URL = 'http://localhost:8080/api/user'
 
 export default class FavoriteService {
     constructor(singletonToken) {
@@ -14,29 +15,48 @@ export default class FavoriteService {
     }
 
     //CREATE
-    createFavorite() {
-        return (
-            fetch(FAVORITE_API_URL,
-                )
-        )
+    /*
+    * invoked from details page
+    *
+    * given a JSON favorite with URI and current user
+    * */
+    createFavorite(favorite) {
+        return fetch(FAVORITE_API_URL, {
+            body: JSON.stringify(favorite),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response) {
+            return response.json();
+        });
     }
 
     //READ
     findAllFavorites() {
-        return (
-            fetch()
-        )
+        return fetch(FAVORITE_API_URL)
+            .then(function (response) {
+                return response.json();
+            });
     }
 
-    findFavoritesForUser() {
-
+    findFavoritesForUser(userId) {
+        return fetch(USER_API_URL + '/' + userId + '/favorite')
+            .then(function (response) {
+                return response.json();
+            });
     }
 
     //UPDATE
-
+    // Should not be needed
+    updateFavorite() {}
 
     //DELETE
-    deleteFavorite() {
-
+    deleteFavorite(fid) {
+        return fetch(FAVORITE_API_URL + '/' + fid, {
+                method: 'delete'
+            }).then(function (response) {
+                return response;
+        });
     }
 }

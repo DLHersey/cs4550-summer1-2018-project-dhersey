@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import FavoriteService from "../services/FavoriteService";
+import auth from '../auth/authenticator';
 
 export default class FavoritesList
     extends React.Component {
@@ -10,17 +11,17 @@ export default class FavoritesList
         this.state = {
             favorites: []
         }
-        this.removeFavorite=this.removeFavorite.bind(this);
-        this.findAllFavorites=this.findAllFavorites.bind(this);
+        this.removeFavorite = this.removeFavorite.bind(this);
+        this.findAllFavoritesForUser = this.findAllFavoritesForUser.bind(this);
     }
 
     componentDidMount() {
-        this.findAllFavorites;
+        this.findAllFavoritesForUser(auth.getId());
     }
 
-    findAllFavorites() {
+    findAllFavoritesForUser(userId) {
         this.favoriteService
-            .findAllFavorites()
+            .findAllFavoritesForUser(userId)
             .then((favorites) => {
                 console.log(favorites);
                 this.state.favorites = favorites;
@@ -30,7 +31,7 @@ export default class FavoritesList
     removeFavorite(fid) {
         this.favoriteService
             .deleteFavorite(fid)
-            .then(() => this.findAllFavorites());
+            .then(() => this.findAllFavoritesForUser(auth.getId()));
     }
 
 
