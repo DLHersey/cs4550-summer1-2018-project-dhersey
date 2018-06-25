@@ -1,8 +1,8 @@
 let _singleton = Symbol();
-const LOGIN_API_URL = 'https://cs4550-sp18-project-dlhersey.herokuapp.com//api/login';
-const LOGOUT_API_URL = 'https://cs4550-sp18-project-dlhersey.herokuapp.com//api/logout';
-const USER_API_URL = 'https://cs4550-sp18-project-dlhersey.herokuapp.com//api/user';
-const REGISTER_API_URL = 'https://cs4550-sp18-project-dlhersey.herokuapp.com//api/register';
+const LOGIN_API_URL = 'localhost:8080/api/login';
+const LOGOUT_API_URL = 'localhost:8080/api/logout';
+const USER_API_URL = 'localhost:8080/api/user';
+const REGISTER_API_URL = 'localhost:8080/api/register';
 
 
 export default class userService {
