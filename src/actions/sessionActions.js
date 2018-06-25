@@ -12,7 +12,7 @@ export const loginUser = (dispatch, credentials) => {
     console.log("login: " + credentials.username);
    // sessionStorage.setItem('jwt', SessionApi.login(credentials));
    SessionApi.login(credentials).then(response => {
-       debugger;
+       //debugger;
        if (response.id === undefined) {
         dispatch({type: constants.USER_LOGOUT});
        } else {

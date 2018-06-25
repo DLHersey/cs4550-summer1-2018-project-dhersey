@@ -45,7 +45,7 @@ class Auth {
     }
 
     static getId() {
-        debugger;
+        //debugger;
       var userId = localStorage.getItem('userId');
       return userId;
     }
@@ -69,7 +69,7 @@ class Auth {
 
     static isAdmin() {
       var isAdmin = false;
-      debugger;
+      //debugger;
       if (!!localStorage.jwt) {
         var role = localStorage.getItem('role');
         if (role === undefined) {

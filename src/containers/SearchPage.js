@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import auth from '../auth/authenticator';
 import RecipeService from "../services/RecipeServiceClient";
 import SearchItem from "../components/SearchItem";
 
@@ -13,6 +14,7 @@ export default class SearchPage
         super(props);
         this.recipeService = RecipeService.instance;
         this.state = {
+            userId: auth.getId(),
             searchTerm: "",
             page: 1,
             searchResult: null
@@ -166,7 +168,7 @@ export default class SearchPage
             console.log("renderResults: " + this.state.searchResult.hits);
         let results = this.state.searchResult.hits.map((hit) => {
             console.log("renderResults hit: " + hit.recipe.label);
-            return <SearchItem hit={hit} key={hit.recipe.label}/>
+            return <SearchItem hit={hit} key={hit.recipe.uri}/>
         });
         return results;
     }
@@ -209,6 +211,9 @@ export default class SearchPage
     render() {
         return(
             <div className="container-fluid">
+                <head>
+                    <script src="https://developer.edamam.com/attribution/badge.js"></script>
+                </head>
                 <div className="row">
                 <form className="border border-dark p-5">
                     <h3>Search</h3>

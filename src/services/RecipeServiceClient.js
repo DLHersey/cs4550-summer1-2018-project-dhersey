@@ -17,7 +17,7 @@ export default class RecipeService {
 
     search(searchTerm, fromItem, toItem) {
         console.log("in recipeserviceclient: searchTerm: " + searchTerm + " start: " + fromItem + " end: " + toItem);
-        debugger;
+        //debugger;
         if (searchTerm !== "") {
       return fetch(BASE_RECIPE_API_URL + "&q=" + searchTerm + "&from=" + fromItem + "&to=" + toItem)
       .then(function(response) {

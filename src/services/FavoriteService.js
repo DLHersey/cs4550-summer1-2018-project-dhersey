@@ -20,8 +20,8 @@ export default class FavoriteService {
     *
     * given a JSON favorite with URI and current user
     * */
-    createFavorite(favorite) {
-        return fetch(FAVORITE_API_URL, {
+    createFavorite(userId, favorite) {
+        return fetch(USER_API_URL + '/' + userId + '/favorite', {
             body: JSON.stringify(favorite),
             headers: {
                 'Content-Type': 'application/json'

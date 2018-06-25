@@ -34,9 +34,6 @@ export class MainPage
     render() {
         return(
             <div className="container-fluid">
-                <head>
-                    <script src="https://developer.edamam.com/attribution/badge.js"></script>
-                </head>
                 <Router>
                     <div>
                         <div className="mb-4">
@@ -63,7 +60,8 @@ export class MainPage
                                 <Route path="/LandingPage"
                                        component={LandingPage}>
                                 </Route>
-                                <Route path="/Details"
+                                <Route name="detail"
+                                       path="/Detail"
                                        component={DetailPage}>
                                 </Route>
 

@@ -1,9 +1,9 @@
-const LOGIN_API_URL = 'localhost:8080/api/login';
+const LOGIN_API_URL = 'http://localhost:8080/api/login';
 
 class SessionApi {
     static login(credentials) {
         console.log("in sessionapi: username: " + credentials.username);
-  debugger;
+  //debugger;
       return fetch(LOGIN_API_URL, {
         body: JSON.stringify(credentials),
         headers: {
