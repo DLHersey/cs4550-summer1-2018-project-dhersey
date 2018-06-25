@@ -8,6 +8,7 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import LandingPage from './LandingPage';
 import ProfilePage from './ProfilePage';
 import UserManagePage from './UserManagePage';
+import DetailPage from './DetailPage';
 import LogInContainer from "../components/LogIn";
 import auth from '../auth/authenticator';
 import {connect} from 'react-redux'

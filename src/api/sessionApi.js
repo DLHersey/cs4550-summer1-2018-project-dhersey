@@ -1,4 +1,4 @@
-const LOGIN_API_URL = 'http://localhost:8080/api/login';
+const LOGIN_API_URL = 'https://cs4550-sp18-project-dlhersey.herokuapp.com//api/login';
 
 class SessionApi {
     static login(credentials) {
