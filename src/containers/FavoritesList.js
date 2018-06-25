@@ -16,7 +16,8 @@ export default class FavoritesList
     }
 
     componentDidMount() {
-        this.findAllFavoritesForUser(auth.getId());
+//        this.findAllFavoritesForUser(auth.getId());
+        this.findAllFavoritesForUser(this.props.userId);
     }
 
     findAllFavoritesForUser(userId) {

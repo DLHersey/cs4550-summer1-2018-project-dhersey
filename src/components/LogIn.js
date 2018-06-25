@@ -27,7 +27,7 @@ class LogIn
            console.log(auth.loggedIn());
             if (auth.loggedIn()) {
                 console.log({from});
-                debugger;
+                //debugger;
             //return(<Router><Redirect push to={"/ProfilePage"} /><Route path="/ProfilePage" component={ProfilePage} /></Router>);    
             return (<Redirect to={from} />);
             }
@@ -61,7 +61,7 @@ class LogIn
                                    autoFocus="" value={this.state.credentials.username} onChange={this.onChange}/>
                             <input name="password" className="form-control m-2" placeholder="Password" required=""
                                    type="password" value={this.state.credentials.password} onChange={this.onChange} />
-                            <button className="btn btn-success mb-4 float-md-right" onClick={this.login} type="button">
+                            <button className="btn btn-success mb-4 float-md-right" onClick={this.login}>
                                 Login
                             </button>
                         </div>

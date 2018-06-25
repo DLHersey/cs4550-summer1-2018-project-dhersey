@@ -16,10 +16,19 @@ export const loginUser = (dispatch, credentials) => {
        if (response.id === undefined) {
         dispatch({type: constants.USER_LOGOUT});
        } else {
+
+        /*
     sessionStorage.setItem('jwt', response);
     sessionStorage.setItem('firstName', response.firstName);
     sessionStorage.setItem('role', response.role);
     sessionStorage.setItem('userId', response.id);
+*/
+
+    localStorage.setItem('jwt', response);
+    localStorage.setItem('firstName', response.firstname);
+    localStorage.setItem('role', response.role);
+    localStorage.setItem('userId', response.id);
+
     dispatch({type: constants.USER_LOGIN_SUCCESS});
        }
    })
@@ -30,7 +39,7 @@ export const loginUser = (dispatch, credentials) => {
 export const logOutUser = dispatch => {
     console.log("logout success");
     auth.logOut();
-    dispatch({ type: constants.USER_LOGIN_SUCCESS})
+    dispatch({ type: constants.USER_LOGOUT})
 }
 
 

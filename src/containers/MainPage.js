@@ -7,15 +7,23 @@ import {Redirect, withRouter } from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import LandingPage from './LandingPage';
 import ProfilePage from './ProfilePage';
+import UserManagePage from './UserManagePage';
 import LogInContainer from "../components/LogIn";
 import auth from '../auth/authenticator';
+import {connect} from 'react-redux'
+import * as sessionActions from '../actions/sessionActions';
 
-export default class MainPage
+
+export class MainPage
     extends React.Component {
+        constructor(props) {
+            super(props);
+            
+        }  
 
         renderLogin() {
             if (auth.loggedIn()) {
-                return(<li className="nav-item"><a onclick="auth.logout();">Log Out</a></li>);
+                return(<li className="nav-item"><button  onClick={this.props.logOutUser()}>Log Out</button></li>);
             } else {
                 return(<li className="nav-item"><Link className="nav-link" to={'/Login'}>Login</Link></li>);
             }
@@ -55,6 +63,9 @@ export default class MainPage
                     <PrivateRoute path="/ProfilePage"
                            component={ProfilePage} >
                     </PrivateRoute>
+                    <AdminRoute path="/UserManagePage"
+                           component={UserManagePage} >
+                    </AdminRoute>
                     <Route path="/Login"
                             component={LogInContainer}>
                     </Route>
@@ -67,6 +78,18 @@ export default class MainPage
         )
     }
 }
+
+const stateToPropertiesMapper = (state) => ({
+    session: state.sessionInfo.session
+});
+
+const dispatchToPropsMapper = dispatch => ({
+    logOutUser: ()=> sessionActions.logOutUser(dispatch),
+})
+
+
+const MainPageContainer = connect(stateToPropertiesMapper, dispatchToPropsMapper)(MainPage);
+export default MainPageContainer;
 
 const PrivateRoute = ({ component: Component, ...rest}) => (
     <Route  
@@ -85,6 +108,23 @@ const PrivateRoute = ({ component: Component, ...rest}) => (
     />
 );
 
+
+const AdminRoute = ({ component: Component, ...rest}) => (
+    <Route  
+        {...rest}
+        render={props => auth.isAdmin() ? (
+            <Component {...props} />
+        ) : (
+            <Redirect
+            to={{
+                pathname: "/",
+                state: { from: props.location }
+            }}
+            />
+        )
+    }
+    />
+);
 
 
 /*

@@ -30,5 +30,46 @@ export default class userService {
         });
     }
     
+    findAllUsers() {
+        return fetch(USER_API_URL)
+        .then(function(response) {
+            return response.json();
+        });
+    }
+
+    createUser(user) {
+	    return fetch(USER_API_URL, {
+	        body: JSON.stringify(user),
+	        headers: {
+	       	   'Content-Type': 'application/json'
+	       	},
+	      	method: 'POST'
+	   	}).then(function (response) {
+	        return response.json();
+		});
+   	}
+
+
+   	deleteUser(userId) {
+		console.log('delete' + userId);
+        return fetch(USER_API_URL + '/' + userId, {
+            method: 'delete'
+        }).then(function(response) {
+				return response;
+            }
+		);
+    }
+
+    updateUser(user) {
+        return fetch(USER_API_URL + '/' + user.id, {
+	        body: JSON.stringify(user),
+	        headers: {
+	       	   'Content-Type': 'application/json'
+	       	},
+	      	method: 'POST'
+	   	}).then(function (response) {
+	        return response.json();
+		});
+   	}
 
 }

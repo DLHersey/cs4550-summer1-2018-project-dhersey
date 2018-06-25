@@ -40,9 +40,9 @@ export default class FavoriteService {
             });
     }
 
-    findFavoritesForUser(userId) {
+    findAllFavoritesForUser(userId) {
         return fetch(USER_API_URL + '/' + userId + '/favorite')
-            .then(function (response) {
+            .then(function(response) {
                 return response.json();
             });
     }

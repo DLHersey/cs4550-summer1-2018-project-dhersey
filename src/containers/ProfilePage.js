@@ -3,9 +3,27 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import auth from '../auth/authenticator';
 import LogInContainer from "../components/LogIn";
 import FavoritesList from "./FavoritesList";
+import UserManagePage from "./UserManagePage";
 
 export default class ProfilePage
     extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            userId: auth.getId(),
+            firstName: auth.getFirstName(),
+            role: auth.getRole(),
+            isAdmin: auth.isAdmin()
+        };
+    }
+
+        renderAdmin() {
+            if (this.state.isAdmin) {
+                return <div><UserManagePage/></div>
+            }
+            return;
+        }
 
         renderParts() {
             console.log("ProfilePage - renderParts - auth.loggedIn: " + auth.loggedIn());
@@ -18,7 +36,7 @@ export default class ProfilePage
             }
             */
            var greeting = "Hello " + auth.getFirstName() + "! You're a " + auth.getRole() + "!";
-           return (<div>{greeting}<button onClick={auth.logOut()}>Log Out</button></div>);
+           return (<div>{greeting}&nbsp;&nbsp;<button onClick={auth.logOut()}>Log Out</button></div>);
         }
 
 
@@ -27,9 +45,12 @@ export default class ProfilePage
                 <div>
                     {this.renderParts()}
                     <hr/>
-                    <FavoritesList/>
+                    <FavoritesList userId={this.state.userId}/>
+
+                    <div>
+                        {this.renderAdmin()}
+                    </div>
                 </div>
-    
             )
         }
 }
