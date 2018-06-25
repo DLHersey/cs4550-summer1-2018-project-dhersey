@@ -59,19 +59,22 @@ export class MainPage
 
                         <div className="container-fluid">
                             <Switch>
-                            <Route path="/LandingPage"
-                                   component={LandingPage}>
-                            </Route>
+                                <Route path="/LandingPage"
+                                       component={LandingPage}>
+                                </Route>
+                                <Route path="/Details"
+                                       component={DetailPage}>
+                                </Route>
 
-                            <PrivateRoute path="/ProfilePage"
-                                   component={ProfilePage} >
-                            </PrivateRoute>
-                            <AdminRoute path="/UserManagePage"
-                                   component={UserManagePage} >
-                            </AdminRoute>
-                            <Route path="/Login"
-                                    component={LogInContainer}>
-                            </Route>
+                                <PrivateRoute path="/ProfilePage"
+                                       component={ProfilePage} >
+                                </PrivateRoute>
+                                <AdminRoute path="/UserManagePage"
+                                       component={UserManagePage} >
+                                </AdminRoute>
+                                <Route path="/Login"
+                                        component={LogInContainer}>
+                                </Route>
                             </Switch>
                         </div>
                     </div>
