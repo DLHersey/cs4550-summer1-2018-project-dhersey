@@ -218,6 +218,7 @@ export default class SearchPage
                     <button className="float-right" type="button" onClick={this.runSearch}>Search</button>
                     </div>
                 </form>
+                    <div id="edamam-badge" data-color="white"></div>
                 </div>
                 <div className="">
                     <div><h3>Results: </h3></div>

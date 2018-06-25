@@ -33,46 +33,48 @@ export class MainPage
     render() {
         return(
             <div className="container-fluid">
-            <Router>
-                <div>
-                <div className="mb-4">
-                    <nav className="navbar navbar-expand-lg navbar-dark color-light bg-dark">
-                        <a className="navbar-brand text-light">Project</a>
-                        <div className="collapse navbar-collapse">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="nav-item">
-                                    <Link className="nav-link" to={'/'}>Home</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to={'/LandingPage'}>Recipes</Link>
-                                </li>
-                            </ul>
+                <head>
+                    <script src="https://developer.edamam.com/attribution/badge.js"></script>
+                </head>
+                <Router>
+                    <div>
+                        <div className="mb-4">
+                            <nav className="navbar navbar-expand-lg navbar-dark color-light bg-dark">
+                                <a className="navbar-brand text-light">Project</a>
+                                <div className="collapse navbar-collapse">
+                                    <ul className="navbar-nav mr-auto">
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to={'/'}>Home</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to={'/LandingPage'}>Recipes</Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <span className="nav-item">
+                                    <Link className="nav-link" to={'/ProfilePage'}>Profile</Link>
+                                </span>
+                            </nav>
                         </div>
-                        <span className="nav-item">
-                            <Link className="nav-link" to={'/ProfilePage'}>Profile</Link>
-                        </span>
-                    </nav>
-                </div>
-               
-                <div className="container-fluid">
-                    <Switch>
-                    <Route path="/LandingPage"
-                           component={LandingPage}>
-                    </Route>
 
-                    <PrivateRoute path="/ProfilePage"
-                           component={ProfilePage} >
-                    </PrivateRoute>
-                    <AdminRoute path="/UserManagePage"
-                           component={UserManagePage} >
-                    </AdminRoute>
-                    <Route path="/Login"
-                            component={LogInContainer}>
-                    </Route>
-                    </Switch>
-                </div>
- 
-                </div>
+                        <div className="container-fluid">
+                            <Switch>
+                            <Route path="/LandingPage"
+                                   component={LandingPage}>
+                            </Route>
+
+                            <PrivateRoute path="/ProfilePage"
+                                   component={ProfilePage} >
+                            </PrivateRoute>
+                            <AdminRoute path="/UserManagePage"
+                                   component={UserManagePage} >
+                            </AdminRoute>
+                            <Route path="/Login"
+                                    component={LogInContainer}>
+                            </Route>
+                            </Switch>
+                        </div>
+                    </div>
                 </Router>
             </div>
         )
