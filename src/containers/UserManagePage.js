@@ -1,22 +1,74 @@
 import React from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import userService from "../services/userServiceClient";
 
 export default class UserManagePage
     extends React.Component {
     constructor(props) {
         super(props);
+        this.userService = userService.instance;
         this.state = {
+            user: {
+                username: '',
+                password: '',
+                firstname: '',
+                lastnane: '',
+                emailAddr: '',
+                role: ''
+            },
             users: []
         }
 
         this.renderUsers = this.renderUsers.bind(this);
+        this.createUser=this.createUser.bind(this);
+        this.onChange=this.onChange.bind(this);
     }
+
+    componentDidMount() {
+        this.findAllUsers();
+    }
+
+    findAllUsers() {
+        this.userService
+            .findAllUsers()
+            .then((users) => {
+                this.setState({users: users});
+            });
+    }
+
+    createUser() {
+        console.log(this.state.user);
+        this.userService
+            .createUser(this.state.user)
+            .then(() => { this.findAllUsers(); });
+    }
+
+    deleteUser(userId) {
+        this.userService
+            .deleteUser(userId)
+            .then(() => { this.findAllUsers(); });
+    }
+
+
+    onChange(event) {
+        const field = event.target.name;
+        const user = this.state.user;
+        user[field] = event.target.value;
+        return this.setState({user: user});
+    }
+
+
 
     renderUsers() {
         let users = this.state.users.map((user) => {
             return (
                 <tr key={user.id}>
-                    User row
+                    <th>{user.username}</th>
+                    <th>{user.password}</th>
+                    <th>{user.firstname}</th>
+                    <th>{user.lastnane}</th>
+                    <th>{user.emailAddr}</th>
+                    <th>{user.role}</th>
                 </tr>
             )
         });
@@ -33,38 +85,45 @@ export default class UserManagePage
                         <th>Username</th>
                         <th>Password</th>
                         <th>First Name</th>
-                        <th>LastName</th>
+                        <th>Last Name</th>
                         <th>Email</th>
                         <th>Role</th>
                     </tr>
                     <tr>
                         <th>
-                            <input onChange={this.titleChanged}
+                            <input onChange={this.onChange}
                                    className="form-control col-lg-8" id="usernameFld"
                                    placeholder="Username"/>
                         </th>
                         <th>
-                            <input className="form-control col-lg-5" id="passwordFld"
+                            <input onChange={this.onChange}
+                                   className="form-control col-lg-5" id="passwordFld"
                                    type="password" placeholder="Password"/>
                         </th>
                         <th>
-                            <input className="form-control col-lg-5" id="fNameFld"
-                                   placeholder="First"/>
+                            <input onChange={this.onChange}
+                                   className="form-control col-lg-5" id="fNameFld"
+                                   placeholder="First Name"/>
                         </th>
                         <th>
-                            <input className="form-control col-lg-5" id="lNameFld"
-                                   placeholder="Last"/>
+                            <input onChange={this.onChange}
+                                   className="form-control col-lg-5" id="lNameFld"
+                                   placeholder="Last Name"/>
                         </th>
                         <th>
-                            <input className="form-control col-lg-5" id="emailFld"
+                            <input onChange={this.onChange}
+                                   className="form-control col-lg-5" id="emailFld"
                                    placeholder="Email"/>
                         </th>
                         <th>
-                            <input className="form-control col-lg-5" id="roleFld"
+                            <input onChange={this.onChange}
+                                   className="form-control col-lg-5" id="roleFld"
                                    placeholder="Role"/>
                         </th>
-                        <th><button onClick={this.createCourse}
-                                    className="float-right btn btn-primary" type="button">Add</button></th>
+                        <th>
+                            <button onClick={this.createUser}
+                                    className="float-right btn btn-primary" type="button">Add</button>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
