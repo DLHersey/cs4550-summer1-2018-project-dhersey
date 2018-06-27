@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 
-const FAVORITE_API_URL = 'http://localhost:8080/api/favorite';
-const USER_API_URL = 'http://localhost:8080/api/user'
+const FAVORITE_API_URL = 'https://cs4550-sp18-project-dlhersey.herokuapp.com/api/favorite';
+const USER_API_URL = 'https://cs4550-sp18-project-dlhersey.herokuapp.com/api/user'
 
 export default class FavoriteService {
     constructor(singletonToken) {
