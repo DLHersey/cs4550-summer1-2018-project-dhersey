@@ -30,8 +30,8 @@ export default class FavoritesList
     componentDidMount() {
         let userId = parseInt(this.props.userId, 10);
         this.setUserId(userId);
-        this.findAllFavorites();
-        //this.findAllFavoritesForUser(userId);
+        //this.findAllFavorites();
+        this.findAllFavoritesForUser(userId);
         console.log(this.state.favorites);
     }
 /*
@@ -69,33 +69,34 @@ export default class FavoritesList
     * There is another problem where the table rows are not rendering.
     * I have structured it the same way that I did the UserManagement table. I hve not been able to find the problem.
     * There are no more office hours but I will continue to consult the internet.
-    *
-    * the onClick below is removed because it was running imediately and deleting every reteived favorite.
-    * */
-    //onClick={this.removeFavorite(favorite.id)}
+    **/
+    //
     renderFavoritesList() {
         console.log('Rendering Favorites: '+this.state.favorites);
         let favorites = this.state.favorites.map((favorite) => {
             return (
                 <tr key={favorite.id}>
-                    <td>{favorite.label}</td>
+                    <td>{favorite.recipe}</td>
                     <td>
-                        <button className="btn btn-danger"
+                        <button onClick={() => {this.removeFavorite(favorite.id)}}
+                                className="btn btn-danger"
                                 type="button">Remove</button>
                     </td>
                 </tr>
-              )
+            )
         });
+        return favorites;
     }
 
     render() {
         return(
             <div>
                 <h2>Favorite Recipes: </h2>
-                <table>
+                <table className="table">
+                    <thead></thead>
                     <tbody>
-                        <tr><td>Favoirites are suppored to render here.</td></tr>
-                        {this.renderFavoritesList}
+                        <tr><td>Favoirites are supposed to render here.</td></tr>
+                        {this.renderFavoritesList()}
                     </tbody>
                 </table>
             </div>

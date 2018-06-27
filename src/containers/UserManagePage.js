@@ -89,56 +89,56 @@ export default class UserManagePage
                 <h2>Manage Users</h2>
                 <table className="table">
                     <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input onChange={this.onChange}
-                                   className="form-control col-lg-8" id="usernameFld"
-                                   name="username"
-                                   placeholder="Username"/>
-                        </th>
-                        <th>
-                            <input onChange={this.onChange}
-                                   className="form-control col-lg-5" id="passwordFld"
-                                   name="password"
-                                   type="password" placeholder="Password"/>
-                        </th>
-                        <th>
-                            <input onChange={this.onChange}
-                                   className="form-control col-lg-5" id="fNameFld"
-                                   name="firstname"
-                                   placeholder="First Name"/>
-                        </th>
-                        <th>
-                            <input onChange={this.onChange}
-                                   className="form-control col-lg-5" id="lNameFld"
-                                   name="lastnane"
-                                   placeholder="Last Name"/>
-                        </th>
-                        <th>
-                            <input onChange={this.onChange}
-                                   className="form-control col-lg-5" id="emailFld"
-                                   name="emailAddr"
-                                   placeholder="Email"/>
-                        </th>
-                        <th>
-                            <input onChange={this.onChange}
-                                   className="form-control col-lg-5" id="roleFld"
-                                   name="role"
-                                   placeholder="Role"/>
-                        </th>
-                        <th>
-                            <button onClick={this.createUser}
-                                    className="float-right btn btn-primary" type="button">Add</button>
-                        </th>
-                    </tr>
+                        <tr>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input onChange={this.onChange}
+                                       className="form-control col-lg-8" id="usernameFld"
+                                       name="username"
+                                       placeholder="Username"/>
+                            </th>
+                            <th>
+                                <input onChange={this.onChange}
+                                       className="form-control col-lg-5" id="passwordFld"
+                                       name="password"
+                                       type="password" placeholder="Password"/>
+                            </th>
+                            <th>
+                                <input onChange={this.onChange}
+                                       className="form-control col-lg-5" id="fNameFld"
+                                       name="firstname"
+                                       placeholder="First Name"/>
+                            </th>
+                            <th>
+                                <input onChange={this.onChange}
+                                       className="form-control col-lg-5" id="lNameFld"
+                                       name="lastnane"
+                                       placeholder="Last Name"/>
+                            </th>
+                            <th>
+                                <input onChange={this.onChange}
+                                       className="form-control col-lg-5" id="emailFld"
+                                       name="emailAddr"
+                                       placeholder="Email"/>
+                            </th>
+                            <th>
+                                <input onChange={this.onChange}
+                                       className="form-control col-lg-5" id="roleFld"
+                                       name="role"
+                                       placeholder="Role"/>
+                            </th>
+                            <th>
+                                <button onClick={this.createUser}
+                                        className="float-right btn btn-primary" type="button">Add</button>
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
                         {this.renderUsers()}
