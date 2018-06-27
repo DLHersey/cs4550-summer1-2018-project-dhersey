@@ -60,15 +60,23 @@ export default class UserManagePage
 
 
     renderUsers() {
+        console.log('Rendering Users: '+this.state.users);
         let users = this.state.users.map((user) => {
             return (
                 <tr key={user.id}>
-                    <th>{user.username}</th>
-                    <th>{user.password}</th>
-                    <th>{user.firstname}</th>
-                    <th>{user.lastnane}</th>
-                    <th>{user.emailAddr}</th>
-                    <th>{user.role}</th>
+                    <td>{user.username}</td>
+                    <td>{user.password}</td>
+                    <td>{user.firstname}</td>
+                    <td>{user.lastnane}</td>
+                    <td>{user.emailAddr}</td>
+                    <td>{user.role}</td>
+                    <td>
+                        <button onClick={() => {this.deleteUser(user.id)}}
+                                className="btn btn-danger"
+                                type="button">
+                            Delete User
+                        </button>
+                    </td>
                 </tr>
             )
         });
@@ -93,31 +101,37 @@ export default class UserManagePage
                         <th>
                             <input onChange={this.onChange}
                                    className="form-control col-lg-8" id="usernameFld"
+                                   name="username"
                                    placeholder="Username"/>
                         </th>
                         <th>
                             <input onChange={this.onChange}
                                    className="form-control col-lg-5" id="passwordFld"
+                                   name="password"
                                    type="password" placeholder="Password"/>
                         </th>
                         <th>
                             <input onChange={this.onChange}
                                    className="form-control col-lg-5" id="fNameFld"
+                                   name="firstname"
                                    placeholder="First Name"/>
                         </th>
                         <th>
                             <input onChange={this.onChange}
                                    className="form-control col-lg-5" id="lNameFld"
+                                   name="lastnane"
                                    placeholder="Last Name"/>
                         </th>
                         <th>
                             <input onChange={this.onChange}
                                    className="form-control col-lg-5" id="emailFld"
+                                   name="emailAddr"
                                    placeholder="Email"/>
                         </th>
                         <th>
                             <input onChange={this.onChange}
                                    className="form-control col-lg-5" id="roleFld"
+                                   name="role"
                                    placeholder="Role"/>
                         </th>
                         <th>

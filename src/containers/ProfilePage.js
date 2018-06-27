@@ -45,7 +45,9 @@ export default class ProfilePage
                 <div>
                     {this.renderParts()}
                     <hr/>
-                    <FavoritesList userId={this.state.userId}/>
+                    <div>
+                        <FavoritesList userId={this.state.userId}/>
+                    </div>
                     <div>
                         {this.renderAdmin()}
                     </div>
